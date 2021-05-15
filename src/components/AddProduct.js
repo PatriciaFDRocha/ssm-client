@@ -70,13 +70,13 @@ class AddProduct extends React.Component {
             <form onSubmit={this.handleFormSubmit} encType="multipart/form-data" >
                 
                 <label>Image</label>
-                <input type="file" onChange={this.handleFileChange} />
+                <input type="file" onChange={this.handleFileChange} width="250px" height="300px" />
                 
                 <label>Name</label>
                 <input type="text" name="name" onChange={this.handleChange} value={name} />
 
-                <label>Price</label>
-                <input type="number" name="price" onChange={this.handleChange} value={price} />
+                <label>Price </label>
+                <input type="number" name="price" onChange={this.handleChange} value={price} />€
 
                 <label>Description</label>
                 <input type="text" name="description" onChange={this.handleChange} value={description} />
