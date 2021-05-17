@@ -1,5 +1,5 @@
-body {
-  background-color: blanchedalmond;
+a {
+  margin-right: 2rem;
 }
 
 .logo {
@@ -7,15 +7,13 @@ body {
   margin-left: 3rem;
 }
 
-.navbar-nav > a {
-  margin-right: 7rem;
-}
-
 .search-bar {
-  padding: 10px 35px 10px 15px;
+  padding: 10px 35px 20px 15px;
   border: none;
   border-radius: 100px;
   outline: none;
+  display: flex;
+  align-items: center;
 }
 
 .search-button {
@@ -27,4 +25,9 @@ body {
   width: 15px;
   height: 15px;
   object-fit: contain;
+}
+
+.welc {
+  background-color: tomato ;
+  padding: 2%;
 }

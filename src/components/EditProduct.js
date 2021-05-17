@@ -1,16 +1,30 @@
 import React from 'react';
-import '../styles/AddProduct.css';
-import { addProduct, uploadFile } from '../api';
+import { editProduct, getProduct, uploadFile } from '../api';
 import { Form, Button } from 'react-bootstrap';
 
-class AddProduct extends React.Component {
+class EditProduct extends React.Component {
     state = {
+        _id: '',
         pictureUrl: '',
         name: '',
         price: 0,
         description: '',
         brand: '',
         shopName: ''
+    }
+
+    async componentDidMount() {
+        const response = await getProduct(this.props.match.params.id);
+
+        this.setState({
+            _id: response.data._id,
+            pictureUrl: response.data.pictureUrl,
+            name: response.data.name,
+            price: response.data.price,
+            description: response.data.description,
+            brand: response.data.brand,
+            shopName: response.data.shopName
+        })
     }
 
     handleFileChange = (event) => {
@@ -26,13 +40,15 @@ class AddProduct extends React.Component {
           [name]: value,
         });
     };
-
+    
     handleFormSubmit = async (event) => {
 
         event.preventDefault();
-        const {
-            pictureUrl, 
-            name, 
+
+        const { 
+            _id,
+            pictureUrl,
+            name,
             price,
             description,
             brand,
@@ -42,19 +58,18 @@ class AddProduct extends React.Component {
         uploadData.append("file", pictureUrl);
 
         //Upload image to api
-        const response = await uploadFile(uploadData)
+        const response = await uploadFile(uploadData);
         
-        //Create the project on our api
-        const newProduct = {
-            pictureUrl: response.data.fileUrl, 
-            name, 
+        const updatedProject = {
+            _id,
+            name,
             price,
             description,
             brand,
-            shopName
-        };
-
-        await addProduct(newProduct);
+            shopName,
+            pictureUrl: response.data.fileUrl,
+        }
+        await editProduct(updatedProject);
         this.props.history.push("/products");
     }
 
@@ -68,8 +83,7 @@ class AddProduct extends React.Component {
             shopName } = this.state;
 
         return(
-            <div className="add" style={{ height: '100%' }}>
-            <h3>Add Product</h3>
+            <div style={{ height: '100%' }}>
             <Form className="form" onSubmit={this.handleFormSubmit} encType="multipart/form-data" >
                 <Form.Group>
                     <Form.File id="exampleFormControlFile1" label="Image" style={{fontWeight: "bold"}} onChange={this.handleFileChange} width="250px" height="300px"  />
@@ -100,13 +114,13 @@ class AddProduct extends React.Component {
                     <Form.Control  type="text" name="shopName" onChange={this.handleChange} value={shopName} />
                 </Form.Group>
                 <br />
-                <Button variant="info" as="input" type="submit" value="Create Product" />
-                <br></br>
-                <br></br>
+                <Button as="input" type="submit" value="Update Product" />
+                <br />
             </Form>
+            <br />
             </div>
         )
     }
 }
 
-export default AddProduct;
+export default EditProduct;

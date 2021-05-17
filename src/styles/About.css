@@ -1,0 +1,26 @@
+
+.about {
+    margin: 5% 5%;
+    padding: 3%;
+    background-repeat: no-repeat;
+    background-size: contain center;
+}
+
+.title {
+    padding: 5%;
+}
+
+.git {
+    width: 60px;
+    height: 50px;
+}
+
+.linke {
+    width: 60px;
+    height: 40px;
+}
+
+.home {
+    width: 60px;
+    height: 50px;
+}

@@ -1,6 +1,7 @@
 import React from 'react';
-//import { NavLink } from 'react-router-dom';
+import Rating from './Rating';
 import { getProduct, deleteProduct, addShoppingToDB, getShoppingCart } from '../api';
+import { NavLink } from 'react-router-dom';
 
 class SeeProduct extends React.Component {
     state = {
@@ -11,7 +12,7 @@ class SeeProduct extends React.Component {
         description: "",
         brand: "",
         shopName: "",
-        setCartProduct: []
+        productsInCart: []
     }
 
     async componentDidMount() {
@@ -28,7 +29,7 @@ class SeeProduct extends React.Component {
             description: response.data.description,
             brand: response.data.brand,
             shopName: response.data.shopName,
-            setCartProduct: responseFromCart.data,
+            productsInCart: responseFromCart.data,
         });
     };
 
@@ -38,11 +39,12 @@ class SeeProduct extends React.Component {
     };
 
 
-    addToCart = async (product) => {
-        const response = await addShoppingToDB(product);
+    addToCart = async (productId) => {
+
+        await addShoppingToDB(1, productId);
 
         this.setState({
-            setCartProduct: this.state.products.concat(response)
+            productsInCart: this.state.productsInCart.concat(productId)
         });
     };
 
@@ -54,24 +56,31 @@ class SeeProduct extends React.Component {
             price,
             description,
             brand,
-            shopName } = this.state;
+            shopName 
+        } = this.state;
         
-            return(
-                <>
-                <h2> {name} </h2>
-                <img src={pictureUrl} alt={name} width="250px" height="350px" />
-                <h4> {price} € </h4>
-                <h4> {shopName} </h4>
-                <p> {brand} </p>
-                <p> {description} </p>
+        return(
+            <div style={{ height: '100%' }}>
+            <h2> {name} </h2>
+            <img src={pictureUrl} alt={name} width="250px" height="350px" />
+            <h4> {price} € </h4>
+            <h4> {shopName} </h4>
+            <p> {brand} </p>
+            <p> {description} </p>
 
+            <p>Rate the product</p>
+            <button><Rating /></button>
 
-                <button onClick={() => this.addToCart(_id) }> Add to Shopping Cart </button>
-                </>
-            )
-                {/* <NavLink exact to ={`/products/${_id}/edit`} > Edit </NavLink> only if shopName admin
-                <button onClick={() => this.handleDeleteProduct(_id)}> Delete </button> */}
-                
+            <br></br>
+
+            <button onClick={() => this.addToCart(_id) }> Add to Shopping Cart </button>
+            <br></br>
+
+            <button onClick={() => this.handleDeleteProduct(_id)} > Delete Product </button>
+            <br></br>
+             <NavLink to={`/products/${_id}/edit`}>Edit</NavLink>
+            </div>
+        )   
     }
 }
 

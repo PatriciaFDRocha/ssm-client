@@ -17,24 +17,36 @@ export const getProduct = (id) => {
   return axios.get(`${baseUrl}/products/${id}`);
 };
 
+export const editProduct = (editedProduct) => {
+  return axios.put(`${baseUrl}/products/${editedProduct._id}/edit`, editedProduct, { withCredentials: true });
+};
+
 export const deleteProduct = (id) => {
   return axios.delete(`${baseUrl}/products/${id}`);
 };
 
-//?add to cart
-export const addShoppingToDB = (product) => {
-  return axios.post(`${baseUrl}/shopping-cart`, product);
+//add to cart
+export const addShoppingToDB = (quantity, productId) => {
+  return axios.post(`${baseUrl}/shopping-cart`, {quantity, productId}, { withCredentials: true });
 }
-
+//get cart
 export const getShoppingCart = () => {
   return axios.get(`${baseUrl}/shopping-cart`);
 }
 
 //Authentication
-export const signup = (username, email, password) => {
-  return axios.post(`${baseUrl}/signup`, {username, email, password});
+export const signup = ( name, username, password) => {
+  return axios.post(`${baseUrl}/signup`, { name, username, password});
 };
 
-export const login = ( email, password ) => {
-  return axios.post(`${baseUrl}/login`, { email, password }, { withCredentials: true });
+export const login = ( username, password ) => {
+  return axios.post(`${baseUrl}/login`, { username, password }, { withCredentials: true });
 };
+
+export const loggedin = () => {
+  return axios.get(`${baseUrl}/loggedin`, {withCredentials: true});
+};
+
+export const logout = () => {
+  return axios.post(`${baseUrl}/logout`, null, {withCredentials: true});
+}

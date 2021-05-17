@@ -1,16 +1,17 @@
 import React from 'react';
-import NavBar from './NavBar';
-
+import '../styles/HomePage.css';
 
 function HomePage() {
     return(
-        <>
+        <div style={{ height: '100%' }} >
             
             <br></br>
             Welcome Person
-            <br></br>
-            <img src="../images/transferir.jpg" alt="some-img" />
-        </>
+            <br />
+            <br />
+            <br />
+            <img className="img-logo" src="../images/logo.png" alt="logo" />
+        </div>
     )
 }
 

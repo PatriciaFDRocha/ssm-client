@@ -1,28 +1,18 @@
 import React from 'react';
-import { loadStripe } from '@stripe/stripe-js';
-const stripePromise = loadStripe(process.env.STRIPE_API_KEY);
+import { NavLink } from 'react-router-dom'
 
+function Checkout() {
+    return(
+        <div style={{ height: '100%' }}>
+            <h1>Thank you for your order!</h1>
+            <p> We appreciate your support to our business </p>
+            <p>
+                If you have any questions, please email
+                <NavLink to="/"> orders@example.com</NavLink>
+            </p>
+            <button> <NavLink to="/"> Back To Home Page</NavLink> </button>
+        </div>
+    )
+}
 
-
-router.post('/create-checkout-session', async (req, res) => {
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
-      line_items: [
-        {
-          price_data: {
-            currency: 'euro',
-            product_data: {
-              name: 'T-shirt',
-            },
-            unit_amount: 2000,
-          },
-          quantity: 1,
-        },
-      ],
-      mode: 'payment',
-      success_url: 'http://localhost:5000/',
-      cancel_url: 'http://localhost:5000/shopping-cart',
-    });
-  
-    res.json({ id: session.id });
-  });
+export default Checkout;
