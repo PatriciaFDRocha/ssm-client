@@ -13,11 +13,10 @@ import ProductList from './components/ProductsList';
 import AddProduct from './components/AddProduct';
 import SeeProduct from './components/SeeProduct';
 import EditProduct from './components/EditProduct';
-import ShoppingCart from './components/ShoppingCart';
 import About from './components/About';
 import PrivateRoute from './components/PrivateRoute';
-import Checkout from './components/Checkout';
-
+import AddReview from './components/AddReview';
+import WishList from './components/WishList';
 
 
 class App extends React.Component {
@@ -69,7 +68,7 @@ class App extends React.Component {
           <Route exact path="/" component={HomePage} />
           <Route exact path="/products" component={ProductList} />
           <PrivateRoute exact path="/products/add" component={AddProduct} />
-          <Route exact path="/products/:id" component={SeeProduct} />
+          <Route exact path="/products/:id" render={(props) => <SeeProduct loggedInUser={loggedInUser} {...props} />} />
           <PrivateRoute exact path="/products/:id/edit" component={EditProduct} />
           <Route exact path="/signup" component={Signup} />
           <Route
@@ -80,8 +79,8 @@ class App extends React.Component {
             }}
           />
           <Route exact path="/about" component={About} />
-          <Route exact path="/shopping-cart" component={ShoppingCart} />
-          <Route exact path="/checkout" component={Checkout} /> 
+          <Route exact path="reviews/:id/add" component={AddReview} />
+          <Route exact path="/favourites" component={WishList} />
         </Switch>
         
       </div>

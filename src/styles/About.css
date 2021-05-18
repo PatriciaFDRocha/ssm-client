@@ -2,8 +2,8 @@
 .about {
     margin: 5% 5%;
     padding: 3%;
-    background-repeat: no-repeat;
-    background-size: contain center;
+    background-repeat: repeat;
+    background-size: contain;
 }
 
 .title {

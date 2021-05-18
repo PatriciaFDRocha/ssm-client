@@ -1,7 +1,5 @@
-.add {
-    background-color: orange ;
-}
 
 .form {
-    margin: 5% 15% 10% 15%;
+    padding: 5% 15% 10% 15%;
+    background-color: orange ;
 }

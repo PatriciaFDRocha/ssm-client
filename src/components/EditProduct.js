@@ -42,7 +42,6 @@ class EditProduct extends React.Component {
     };
     
     handleFormSubmit = async (event) => {
-
         event.preventDefault();
 
         const { 

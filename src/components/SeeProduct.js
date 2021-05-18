@@ -1,7 +1,9 @@
 import React from 'react';
-import Rating from './Rating';
-import { getProduct, deleteProduct, addShoppingToDB, getShoppingCart } from '../api';
+import { getProduct, deleteProduct } from '../api';
 import { NavLink } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
+import '../styles/SeeProduct.css';
+import AddReview from './AddReview';
 
 class SeeProduct extends React.Component {
     state = {
@@ -12,14 +14,13 @@ class SeeProduct extends React.Component {
         description: "",
         brand: "",
         shopName: "",
-        productsInCart: []
+        owner: '',
     }
 
     async componentDidMount() {
         const productId = this.props.match.params.id;
         const response = await getProduct(productId);
 
-        const responseFromCart = await getShoppingCart();
 
         this.setState({
             _id: response.data._id,
@@ -29,7 +30,7 @@ class SeeProduct extends React.Component {
             description: response.data.description,
             brand: response.data.brand,
             shopName: response.data.shopName,
-            productsInCart: responseFromCart.data,
+            owner: response.data.user
         });
     };
 
@@ -39,14 +40,12 @@ class SeeProduct extends React.Component {
     };
 
 
-    addToCart = async (productId) => {
-
-        await addShoppingToDB(1, productId);
-
-        this.setState({
-            productsInCart: this.state.productsInCart.concat(productId)
-        });
-    };
+    // addToCart = async (productId) => {
+    //     let response = await addShoppingToDB(1, productId);
+    //     this.setState({
+    //         productsInCart: response.data
+    //     });
+    // };
 
     render() {
         const {
@@ -60,28 +59,26 @@ class SeeProduct extends React.Component {
         } = this.state;
         
         return(
-            <div style={{ height: '100%' }}>
-            <h2> {name} </h2>
-            <img src={pictureUrl} alt={name} width="250px" height="350px" />
-            <h4> {price} € </h4>
-            <h4> {shopName} </h4>
-            <p> {brand} </p>
-            <p> {description} </p>
+            <div className="see-div" style={{ height: '100%' }}>
+                <h2> <strong> Name: </strong> {name} </h2>
+                <img src={pictureUrl} alt={name} width="250px" height="350px" />
+                <h4> {price}€ </h4>
+                <h5> <strong>Shop Name: </strong>  {shopName} </h5>
+                <p> <strong>Brand: </strong>  {brand} </p>
+                <p> <strong>Description: </strong>  {description} </p>
+                
+                {this.props.loggedInUser && (this.props.loggedInUser.username === this.state.owner.username && (
+                    <>
+                    <AddReview />
+                    <Button onClick={() => this.handleDeleteProduct(_id)} variant="danger" > Delete </Button>
 
-            <p>Rate the product</p>
-            <button><Rating /></button>
-
-            <br></br>
-
-            <button onClick={() => this.addToCart(_id) }> Add to Shopping Cart </button>
-            <br></br>
-
-            <button onClick={() => this.handleDeleteProduct(_id)} > Delete Product </button>
-            <br></br>
-             <NavLink to={`/products/${_id}/edit`}>Edit</NavLink>
+                    <NavLink to={`/products/${_id}/edit`}> <Button variant="info" > Edit </Button> </NavLink>
+                    </>
+                ))}
             </div>
         )   
     }
 }
 
 export default SeeProduct;
+

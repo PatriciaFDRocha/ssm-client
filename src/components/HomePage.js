@@ -6,7 +6,6 @@ function HomePage() {
         <div style={{ height: '100%' }} >
             
             <br></br>
-            Welcome Person
             <br />
             <br />
             <br />

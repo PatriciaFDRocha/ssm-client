@@ -1,34 +1,22 @@
-import React from 'react';
-import StarRatings from 'react-star-ratings';
+// import React from 'react';
+// import StarRatings from 'react-star-ratings';
 
 
-class Rating extends React.Component {
+// class Rating extends React.Component {
 
-  state = {
-    rating: 0
-  }
+//   state = {
+//     rating: 0
+//   }
 
-  changeRating = (rating) => {
+  
 
-    this.setState({
-      rating: rating
-    });
-  }
-
-  render() {
+//   render() {
     
-    return (
-      <StarRatings
-        rating={this.state.rating}
-        starEmptyColor='white'
-        starRatedColor="yellow"
-        starDimension='15px'
-        changeRating={ this.changeRating }
-        name='rating'
-      />
-    );
-  }
+//     return (
+      
+//     );
+//   }
 
-}
+// }
 
-export default Rating;
+// export default Rating;

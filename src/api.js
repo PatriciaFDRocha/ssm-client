@@ -6,7 +6,7 @@ export const getAllProducts = () => {
 };
 
 export const addProduct = (product) => {
-  return axios.post(`${baseUrl}/products`, product);
+  return axios.post(`${baseUrl}/products`, product,  { withCredentials: true });
 };
 
 export const uploadFile = (uploadData) => {
@@ -22,17 +22,17 @@ export const editProduct = (editedProduct) => {
 };
 
 export const deleteProduct = (id) => {
-  return axios.delete(`${baseUrl}/products/${id}`);
+  return axios.delete(`${baseUrl}/products/${id}`, { withCredentials: true });
 };
 
-//add to cart
-export const addShoppingToDB = (quantity, productId) => {
-  return axios.post(`${baseUrl}/shopping-cart`, {quantity, productId}, { withCredentials: true });
-}
-//get cart
-export const getShoppingCart = () => {
-  return axios.get(`${baseUrl}/shopping-cart`);
-}
+export const addReview = (id) => {
+  return axios.post(`${baseUrl}/reviews/${id}`, { withCredentials: true })
+};
+
+export const addToWishList = (id) => {
+  return axios.post(`${baseUrl}/favourites/${id}`, { withCredentials: true })
+};
+
 
 //Authentication
 export const signup = ( name, username, password) => {
