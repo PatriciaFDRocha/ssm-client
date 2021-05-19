@@ -35,10 +35,12 @@ class NavBar extends React.Component {
                 <Nav className="mr-auto">
 
                     <NavLink exact to="/products"> View Products </NavLink>
-                                    
-                    <NavLink exact to="/products/add"> Add Products </NavLink>
 
                     <NavLink exact to="/about"> About </NavLink>
+
+                    <NavLink exact to="/favourites"> Wish List </NavLink>
+
+                    <NavLink exact to="/shop"> MyShop </NavLink>
 
                 </Nav>
                 <Form inline className="search-bar">

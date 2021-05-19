@@ -1,9 +1,11 @@
 import React from 'react';
-import { getProduct, deleteProduct } from '../api';
+import { getProduct, deleteProduct, addShoppingToDB, addToWishList, getShoppingCart } from '../api';
 import { NavLink } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
+import { Button, Container } from 'react-bootstrap';
 import '../styles/SeeProduct.css';
 import AddReview from './AddReview';
+import WishList from './WishList';
+
 
 class SeeProduct extends React.Component {
     state = {
@@ -15,11 +17,16 @@ class SeeProduct extends React.Component {
         brand: "",
         shopName: "",
         owner: '',
+        productsInCart: [],
+        reviews: [],
+        favourites: [],
     }
 
     async componentDidMount() {
         const productId = this.props.match.params.id;
         const response = await getProduct(productId);
+
+        const responseFromCart = await getShoppingCart();
 
 
         this.setState({
@@ -30,7 +37,9 @@ class SeeProduct extends React.Component {
             description: response.data.description,
             brand: response.data.brand,
             shopName: response.data.shopName,
-            owner: response.data.user
+            owner: response.data.user,
+            reviews: response.data.reviews,
+            productsInCart: responseFromCart.data,
         });
     };
 
@@ -40,12 +49,22 @@ class SeeProduct extends React.Component {
     };
 
 
-    // addToCart = async (productId) => {
-    //     let response = await addShoppingToDB(1, productId);
-    //     this.setState({
-    //         productsInCart: response.data
-    //     });
-    // };
+    addToCart = async (productId) => {
+        
+        const response = await addShoppingToDB(productId);
+        console.log(response);
+
+        this.setState({
+            productsInCart: response.data
+        });
+    };
+
+    addToFavourites = async (id) => {
+        
+        await addToWishList(id);
+
+        this.props.history.push("/products/favourites");
+    };
 
     render() {
         const {
@@ -55,26 +74,49 @@ class SeeProduct extends React.Component {
             price,
             description,
             brand,
-            shopName 
+            shopName,
+            //reviews,
         } = this.state;
-        
+
         return(
             <div className="see-div" style={{ height: '100%' }}>
-                <h2> <strong> Name: </strong> {name} </h2>
+                <h2 className="name"> <strong> Name: </strong> {name} </h2>
                 <img src={pictureUrl} alt={name} width="250px" height="350px" />
                 <h4> {price}€ </h4>
                 <h5> <strong>Shop Name: </strong>  {shopName} </h5>
                 <p> <strong>Brand: </strong>  {brand} </p>
                 <p> <strong>Description: </strong>  {description} </p>
                 
+                
                 {this.props.loggedInUser && (this.props.loggedInUser.username === this.state.owner.username && (
-                    <>
-                    <AddReview />
-                    <Button onClick={() => this.handleDeleteProduct(_id)} variant="danger" > Delete </Button>
+                    <div> 
+                    <Button className="button1" onClick={() => this.handleDeleteProduct(_id)} variant="danger" > Delete </Button>
 
-                    <NavLink to={`/products/${_id}/edit`}> <Button variant="info" > Edit </Button> </NavLink>
-                    </>
+                    <NavLink to={`/products/${_id}/edit`}> <Button className="button2" variant="success" > Edit </Button> </NavLink>
+
+                    <br></br>
+                    <AddReview {...this.props} productId={_id} loggedInUser={this.props.loggedInUser}/>
+                    </div>
                 ))}
+
+                <Button className="button3" onClick={() => this.addToFavourites(_id)} variant="info" type="button" >Add to Wish List</Button>
+                <br></br>
+                <Button onClick={() => this.addToCart(_id)} variant="info" type="button" >Add To ShoppingCart</Button>
+
+                {/* <WishList productId={_id} loggedInUser={this.props.loggedInUser}/> */}
+
+                <Container fluid style={{ backgroundColor: 'maroon', color: 'whitesmoke' }}>
+                    <p> <strong> Reviews: </strong> </p>
+                    {/* {reviews.map((review) => {
+                        return(
+                            <>
+                            <h5>{this.props.loggedInUser.name}</h5>
+                            <p>{review.rating}</p>
+                            </>
+                        )
+                    })} */}
+                </Container>
+
             </div>
         )   
     }

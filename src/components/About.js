@@ -10,16 +10,15 @@ function About() {
 
             <h3 className="title" >About the Maker</h3>
 
-            <img src="../images/Perfil.jpg" alt="profile" width="100px" height="90px" />
+            <img className="img" src="../images/Perfil.jpg" alt="profile"/>
             <br></br>
 
-            <NavLink to="https://github.com/PatriciaFDRocha/" > <img className="git" src="../images/github.png" alt="github-logo" /> GitHub </NavLink>
+            <NavLink to="https://github.com/PatriciaFDRocha/" className="git-name"> <img className="git" src="../images/github.png" alt="github-logo" /> GitHub </NavLink>
+
+            <NavLink to="https://www.linkedin.com/in/patricia-ferreira-da-rocha/" className="linke-name" > <img className="linke" src="../images/Linkedin-Logo.png" alt="linkedin-logo" /> LinkedIn </NavLink>
             <br></br>
 
-            <NavLink to="https://www.linkedin.com/in/patricia-ferreira-da-rocha/" > <img className="linke" src="../images/Linkedin-Logo.png" alt="linkedin-logo" /> LinkedIn </NavLink>
-            <br></br>
-
-            <NavLink to="/"> <img className="home" src="../images/logo.png" alt="logo" /> Home </NavLink>
+            <NavLink to="/" className="home-name"> <img className="home" src="../images/logo.png" alt="logo" /> Home </NavLink>
         </div>
     )
 }

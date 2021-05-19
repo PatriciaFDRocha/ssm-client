@@ -1,28 +1,17 @@
 import React from 'react';
-import { getProduct, addReview } from '../api';
+import { addNewReview } from '../api';
 import StarRatings from 'react-star-ratings';
 import { Form, Button } from 'react-bootstrap';
+import '../styles/AddReview.css';
 
 
 class AddReview extends React.Component {
-
+    
     state = {
-        user: '',
-        comment: '',
+        comment: "",
         rating: 0
     }
 
-    // async componentDidMount() {
-    //     const productId = this.props.match.params.id;
-    //     const response = await getProduct(productId);
-
-    //     this.setState({
-    //         user: response.data.reviews.user,
-    //         comment: response.data.reviews.comment,
-    //         rating: response.data.reviews.rating
-    //     })
-    // }
-    
     changeRating = (rating) => {
         this.setState({
           rating: rating
@@ -42,42 +31,36 @@ class AddReview extends React.Component {
         event.preventDefault();
 
         const {
-            user,
             comment,
             rating
         } = this.state;
-        
-        const newReview = {
-            user,
-            comment,
-            rating,
-        };
 
-        await addReview(newReview);
-        this.props.history.push("/reviews");
+        
+        await addNewReview( comment, rating, this.props.productId);
+        this.props.history.push("/products");
     }
 
 
 
     render() {
-        const { user, comment, rating } = this.state;
+        const { comment, rating } = this.state;
 
         return(
-            <>
+            <div className="review">
             {this.props.loggedInUser ? (
 
                 <Form className="form" onSubmit={this.handleFormSubmit} >
-                <h3>Rate the product</h3>
+                <h3>Review Product</h3>
 
                 <Form.Group controlId="exampleForm.ControlInput1">
                     <Form.Label><b>User</b></Form.Label>
-                    <Form.Control type="text" name="user" onChange={this.handleChange} value={user} />
+                    <Form.Control type="text" name="name" readOnly value={this.props.loggedInUser.name} />
                 </Form.Group>
                 <br />
                 
                 <Form.Group controlId="exampleForm.ControlTextarea1">
                     <Form.Label><b>Comment</b></Form.Label>
-                    <Form.Control as="textarea" rows={3} name="comment" onChange={this.handleChange} value={comment} />
+                    <Form.Control as="textarea" rows={5} name="comment" onChange={this.handleChange} value={comment} />
                 </Form.Group>
                 <br />
 
@@ -90,7 +73,7 @@ class AddReview extends React.Component {
                     name='rating'
                 />
                 <br></br>
-                <Button variant="info" as="input" type="submit" value="Rate Product" />
+                <Button variant="info" as="input" type="submit" value="Rate Product" ></Button>
                 <br></br>
                 <br></br>
             </Form>
@@ -101,7 +84,7 @@ class AddReview extends React.Component {
                 </>
                 )
             }
-        </>
+        </div>
         )
     }
 }

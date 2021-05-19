@@ -79,7 +79,8 @@ class EditProduct extends React.Component {
             price,
             description,
             brand,
-            shopName } = this.state;
+            shopName 
+        } = this.state;
 
         return(
             <div style={{ height: '100%' }}>

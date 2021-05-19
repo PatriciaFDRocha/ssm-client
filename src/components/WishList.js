@@ -1,61 +1,65 @@
 import React from 'react';
-import { getProduct, addToWishList } from '../api';
 import { Form } from 'react-bootstrap';
+import { getProduct, getWishList, removeFromWishList } from '../api';
+import { Button } from 'react-bootstrap';
 
 
 class WishList extends React.Component {
 
     state = {
         favourites: [],
+        _id : '',
     }
 
     async componentDidMount() {
-        const productId = this.props.match.params.id;
-        const response = await getProduct(productId);
-
+        const response = await getWishList();
+        const productId = await getProduct(this.props.match.params.id);
+        
         this.setState({
-            favourites: response.data
+            favourites: response.data,
+            _id: productId,
         })
     }
 
-    handleChange = (event) => {
-        let { name, value } = event.target;
-        
-        this.setState({
-          [name]: value,
-        });
-    };
-
-
-    handleFormSubmit = async (event) => {
-        event.preventDefault();
-
-        const { favourites } = this.state;
-        
-        const newFav = {
-            favourites,
-        };
-
-        await addToWishList(newFav);
-        this.props.history.push("/products");
+    deleteFromFavourites = async (id) => {
+        await removeFromWishList(id);
+        this.props.history.push('/products/favourites');
     }
 
-
-
     render() {
-        const { favourites } = this.state;
+        const { favourites, _id } = this.state; 
         
         return(
-            <div className="add" style={{ height: '100%' }}>
-                <h3>WishList</h3>
-                <Form className="form" onSubmit={this.handleFormSubmit} >
-                {favourites.map((favourite) => {
-                    <Form.Group controlId="exampleForm.ControlInput1">
-                        <Form.Label><b> {favourite.name} </b></Form.Label>
-                        <Form.Control type="text" name="name" onChange={this.handleChange} value={favourite.name} />
-                    </Form.Group>
-                })}
-                </Form>
+            <div className="add" style={{ height: '100%' }} >
+            
+                {this.props.loggedInUser ? (
+                    <>
+                    <h3>WishList</h3>
+                   
+                    <Form className="form" >
+                    
+                        {favourites.map((favourite) => {
+                            return(
+                                <>
+                                <Form.Group controlId="exampleForm.ControlInput1">
+                                    <Form.Label><b> {favourite.name} </b></Form.Label>
+                                    <Form.Control type="text" name="name" onChange={this.handleChange} value={favourite.name} />
+                                </Form.Group>
+
+                                <Button onClick={() => this.deleteFromFavourites(_id)} variant="danger" > Remove </Button>
+                                </>
+                            )
+                        })}
+
+                    </Form>
+                    </>
+                    
+                ) : (
+                    <>
+                    <h5>Can only see Wish List when Logged in</h5>
+                    </>
+                    )
+                }
             </div>
         )
     }

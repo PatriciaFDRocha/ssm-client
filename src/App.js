@@ -15,8 +15,15 @@ import SeeProduct from './components/SeeProduct';
 import EditProduct from './components/EditProduct';
 import About from './components/About';
 import PrivateRoute from './components/PrivateRoute';
-import AddReview from './components/AddReview';
+import SeeAllShops from './components/SeeAllShops';
+import AddShop from './components/AddShop';
+import SeeOnlyShop from './components/SeeOnlyShop';
+import EditShop from './components/EditShop';
 import WishList from './components/WishList';
+import ShoppingCart from './components/ShoppingCart';
+
+// import PaymentTemplate from './components/Payment';
+import Checkout from './components/Checkout';
 
 
 class App extends React.Component {
@@ -66,21 +73,50 @@ class App extends React.Component {
 
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route exact path="/products" component={ProductList} />
-          <PrivateRoute exact path="/products/add" component={AddProduct} />
+          <PrivateRoute exact path="/products" component={ProductList} />
+          <PrivateRoute 
+            exact path="/products/add" 
+            render={(props) => <AddProduct 
+            loggedInUser={loggedInUser} {...props} />} />
+          
           <Route exact path="/products/:id" render={(props) => <SeeProduct loggedInUser={loggedInUser} {...props} />} />
+          
           <PrivateRoute exact path="/products/:id/edit" component={EditProduct} />
           <Route exact path="/signup" component={Signup} />
           <Route
-            exact
-            path="/login"
+            exact path="/login"
             render={(props) => {
               return <Login {...props} setCurrentUser={this.setCurrentUser} />;
             }}
           />
+
           <Route exact path="/about" component={About} />
-          <Route exact path="reviews/:id/add" component={AddReview} />
-          <Route exact path="/favourites" component={WishList} />
+          <Route exact path="/shop" component={SeeAllShops} />
+          <Route exact path="/shop/add" component={AddShop} />
+          <Route 
+            exact path="/shop/:id" 
+            render={(props) => <SeeOnlyShop 
+            loggedInUser={loggedInUser} {...props} />} 
+          />
+
+          <Route 
+            exact path="/shop/:id/edit" 
+            render={(props) => <EditShop 
+            loggedInUser={loggedInUser} {...props} />}
+          />
+
+          <Route exact path="/products/:id/favourites" 
+          render={(props) => <WishList 
+            loggedInUser={loggedInUser} {...props} />}
+          />
+
+          <Route exact path="/shopping-cart" 
+            render={(props) => <ShoppingCart 
+            loggedInUser={loggedInUser} {...props} />}
+           />
+
+          {/* <Route exact path="/payment" component={PaymentTemplate} /> */}
+          <Route exact path="/checkout" component={Checkout} />
         </Switch>
         
       </div>
