@@ -1,17 +1,18 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import TextField from '@material-ui/core/TextField';
-//Install @material-ui/core
+import {TextField, Grid, Typography} from '@material-ui/core';
+import { Button } from 'react-bootstrap';
+import '../styles/Payment.css';
 
 function PaymentTemplate() {
   return (
-      <>
+    <div className="payment" >
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
         Payment method
       </Typography>
       <Grid container spacing={3}>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={10} md={6}>
           <TextField
             required
             id="cardName"
@@ -21,7 +22,8 @@ function PaymentTemplate() {
             variant="standard"
           />
         </Grid>
-        <Grid item xs={12} md={6}>
+        <br></br>
+        <Grid item xs={10} md={6}>
           <TextField
             required
             id="cardNumber"
@@ -31,7 +33,8 @@ function PaymentTemplate() {
             variant="standard"
           />
         </Grid>
-        <Grid item xs={12} md={6}>
+        <br></br>
+        <Grid item xs={5} md={5}>
           <TextField
             required
             id="expDate"
@@ -41,7 +44,8 @@ function PaymentTemplate() {
             variant="standard"
           />
         </Grid>
-        <Grid item xs={12} md={6}>
+        <br></br>
+        <Grid item xs={5} md={5}>
           <TextField
             required
             id="cvv"
@@ -52,10 +56,16 @@ function PaymentTemplate() {
             variant="standard"
           />
         </Grid>
+        <br></br>
       </Grid>
+      <br></br>
     </React.Fragment>
-    <NavLink to="/checkout"><button>Checkout</button></NavLink> 
-    </>
+    <br></br>
+    <br></br>
+    
+
+    <NavLink to="/checkout"><Button className="but" variant="warning" >Checkout</Button></NavLink> 
+    </div>
   );
 }
 

@@ -4,7 +4,6 @@ import { NavLink } from 'react-router-dom';
 import { Button, Container } from 'react-bootstrap';
 import '../styles/SeeProduct.css';
 import AddReview from './AddReview';
-// import WishList from './WishList';
 
 
 class SeeProduct extends React.Component {
@@ -63,7 +62,7 @@ class SeeProduct extends React.Component {
     addToFavourites = async (id) => {
         await addToWishList(id);
 
-        this.props.history.push("/products/favourites");
+        this.props.history.push("/products");
     };
 
     render() {
@@ -75,7 +74,7 @@ class SeeProduct extends React.Component {
             description,
             brand,
             shopName,
-            //reviews,
+            reviews,
         } = this.state;
 
         return(
@@ -95,26 +94,26 @@ class SeeProduct extends React.Component {
                     <NavLink to={`/products/${_id}/edit`}> <Button className="button2" variant="success" > Edit </Button> </NavLink>
 
                     <br></br>
-                    <AddReview {...this.props} productId={_id} loggedInUser={this.props.loggedInUser}/>
+                    {/* <AddReview {...this.props} productId={_id} loggedInUser={this.props.loggedInUser}/> */}
+                    <NavLink to={`/reviews/${_id}/add`} > <Button variant="success" >Add review</Button> </NavLink>
                     </div>
                 ))}
 
                 <Button className="button3" onClick={() => this.addToFavourites(_id)} variant="info" type="button" >Add to Wish List</Button>
                 <br></br>
-                <Button onClick={() => this.addToCart(_id)} variant="info" >Add To ShoppingCart</Button>
-
-                {/* <WishList productId={_id} loggedInUser={this.props.loggedInUser}/> */}
+                <Button onClick={() => this.addToCart(_id)} variant="info" >Add To Shopping Cart</Button>
 
                 <Container fluid style={{ backgroundColor: 'maroon', color: 'whitesmoke' }}>
                     <p> <strong> Reviews: </strong> </p>
-                    {/* {reviews.map((review) => {
+                    {reviews.map((review) => {
                         return(
                             <>
                             <h5>{this.props.loggedInUser.name}</h5>
                             <p>{review.rating}</p>
                             </>
                         )
-                    })} */}
+                    })}
+                    
                 </Container>
 
             </div>

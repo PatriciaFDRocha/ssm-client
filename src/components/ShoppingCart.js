@@ -1,6 +1,8 @@
 import React from 'react';
 import { getShoppingCart } from '../api';
-import 'bulma/css/bulma.css';
+import { NavLink } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
+import '../styles/ShoppinCart.css';
 
 
 class ShoppingCart extends React.Component {
@@ -31,45 +33,30 @@ class ShoppingCart extends React.Component {
 
         return loggedInUser && productsInCart ? (  
                     productsInCart.map((productInCart) => {
-                        return ( 
-                        <div className="box" style={{ height: '100%' }} >
-                        <article className="media">
-                            <div className="media-left">
-                            <figure className="image is-64x64">
-                                <img src={productInCart.product.pictureUrl} alt="img" />
-                            </figure>
-                            </div>
-                            <div className="media-content">
-                            <div className="content">
-                                <p>
-                                <strong>{productInCart.product.name}</strong>
-                                </p>
-                                <p>
-                                <strong>{productInCart.product.price} €</strong>
-                                </p>
-                            </div>
-                            </div>
-                            <div className="media-right">
-                            <div className="field has-addons">
-                                <div className="control">
-                                <input className="input" type="number" value={productInCart.quantity} />
+                        return (
+                            <>
+                            <div className="check">
+                                <img key="img" className="img" src={productInCart.product.pictureUrl} alt="img" />
+                                
+                                <div className="check-2">
+                                    <strong key="name">{productInCart.product.name}</strong>
+                                    <br />
+                                    <strong key="price">{productInCart.product.price} €</strong>
+                                    <br/>
+                                    <strong key="quantity"> Quantity: {productInCart.quantity} </strong>
                                 </div>
-                                <div className="control">
-                                    
-                                    <button className="button is-info" onClick={() => this.deleteFromCart(_id)}> 
-                                        Remove
-                                    </button>
-                                    {/* <NavLink to="/payment" ><button className="button is-info" > Checkout </button></NavLink>  */}
 
+                                <div className="buttons">
+                                    <Button key="button-1" variant="success" onClick={() => this.deleteFromCart(_id)}>Remove</Button>
+                                    <NavLink key="link-1" to="/payment"> <Button variant="success" > Checkout </Button> </NavLink> 
                                 </div>
-                                </div>
-                                </div>
-                            </article>
                             </div>
-                        )}
+                            <hr />
+                            </>
                         )
+                    })
                     ) : (
-            <h3>Shopping Cart Not Available. Please login </h3>
+            <h3> Shopping Cart Not Available. Please login </h3>
         )
     }
 }

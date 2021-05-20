@@ -20,9 +20,10 @@ import AddShop from './components/AddShop';
 import SeeOnlyShop from './components/SeeOnlyShop';
 import EditShop from './components/EditShop';
 import WishList from './components/WishList';
+import AddReview from './components/AddReview';
 import ShoppingCart from './components/ShoppingCart';
 
-// import PaymentTemplate from './components/Payment';
+import PaymentTemplate from './components/Payment';
 import Checkout from './components/Checkout';
 
 
@@ -110,12 +111,17 @@ class App extends React.Component {
             loggedInUser={loggedInUser} {...props} />}
           />
 
+          <Route exact path="/reviews/:id/add" 
+            render={(props) => <AddReview 
+            loggedInUser={loggedInUser} {...props} />}
+          />
+
           <Route exact path="/shopping-cart" 
             render={(props) => <ShoppingCart 
             loggedInUser={loggedInUser} {...props} />}
            />
 
-          {/* <Route exact path="/payment" component={PaymentTemplate} /> */}
+          <Route exact path="/payment" component={PaymentTemplate} />
           <Route exact path="/checkout" component={Checkout} />
         </Switch>
         

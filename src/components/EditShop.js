@@ -83,7 +83,7 @@ class EditShop extends React.Component {
                 <br />
 
                 <br />
-                <Button as="input" type="submit" value="Update Product" />
+                <Button as="input" type="submit" value="Update Shop" />
                 <br />
             </Form>
             <br />

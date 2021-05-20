@@ -8,8 +8,6 @@ class AddShop extends React.Component {
         _id: "",
         shopName: "",
         description: '',
-        latitude: 0,
-        longitude: 0,
     }
 
     handleChange = (event) => {
@@ -58,7 +56,7 @@ class AddShop extends React.Component {
                 <br />
                 <Form.Group controlId="exampleForm.ControlInput1">
                     <Form.Label> <b>Description: </b> </Form.Label>
-                    <Form.Control as="textarea" rows={3} placeholder="open times, types of products" type="text" name="description" onChange={this.handleChange} value={description} />
+                    <Form.Control as="textarea" rows={3} placeholder="open times, types of products, location" type="text" name="description" onChange={this.handleChange} value={description} />
                 </Form.Group>
                 <br />
  

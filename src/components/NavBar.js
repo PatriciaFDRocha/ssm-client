@@ -42,7 +42,7 @@ class NavBar extends React.Component {
 
                     <NavLink exact to="/shop"> MyShop </NavLink>
 
-                    <NavLink exact to="/shopping-cart"> ShoppingCart image </NavLink>
+                    <NavLink exact to="/shopping-cart"> <img src="/images/shopping-cart.png" alt="shopping-cart" width="30px" height="30px" /> </NavLink>
 
                 </Nav>
                 <Form inline className="search-bar">

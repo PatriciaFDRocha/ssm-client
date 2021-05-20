@@ -72,7 +72,6 @@ class EditProduct extends React.Component {
         this.props.history.push("/products");
     }
 
-
     render() {
         const {
             name, 

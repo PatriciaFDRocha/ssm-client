@@ -30,8 +30,8 @@ export const deleteProduct = (id) => {
 
 
 //Reviews
-export const addNewReview = ( comment, rating, id) => {
-  return axios.post(`${baseUrl}/reviews/${id}/add`, { comment, rating }, { withCredentials: true })
+export const addNewReview = ( comment, id) => {
+  return axios.post(`${baseUrl}/reviews/${id}/add`, { comment }, { withCredentials: true })
 };
 
 

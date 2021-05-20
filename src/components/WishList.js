@@ -1,7 +1,6 @@
 import React from 'react';
 import { Form } from 'react-bootstrap';
-import { getProduct, getWishList, removeFromWishList } from '../api';
-import { Button } from 'react-bootstrap';
+import { getWishList, removeFromWishList } from '../api';
 
 
 class WishList extends React.Component {
@@ -14,13 +13,13 @@ class WishList extends React.Component {
         const response = await getWishList();
         
         this.setState({
-            favourites: response.data,
+            favourites: response.data.product
         })
     }
 
     deleteFromFavourites = async (id) => {
         await removeFromWishList(id);
-        this.props.history.push('/products/favourites');
+        this.props.history.push('/favourites');
     }
 
     render() {
@@ -37,9 +36,11 @@ class WishList extends React.Component {
                     
                         {favourites.map((favourite) => {
                             return(
-                                <>
-                                 <p>{favourite.product.name}</p>
-                                </>
+                                <div>
+                                 <h4>{favourite.name}</h4>
+                                 <p>{favourite.price}€ </p>
+                                 <img src={favourite.pictureUrl} alt="img" />
+                                </div>
                             )
                         })}
 

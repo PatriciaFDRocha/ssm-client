@@ -1,6 +1,5 @@
 import React from 'react';
 import { addNewReview } from '../api';
-import StarRatings from 'react-star-ratings';
 import { Form, Button } from 'react-bootstrap';
 import '../styles/AddReview.css';
 
@@ -9,13 +8,6 @@ class AddReview extends React.Component {
     
     state = {
         comment: "",
-        rating: 0
-    }
-
-    changeRating = (rating) => {
-        this.setState({
-          rating: rating
-        });
     }
 
     handleChange = (event) => {
@@ -32,22 +24,22 @@ class AddReview extends React.Component {
 
         const {
             comment,
-            rating
         } = this.state;
 
         
-        await addNewReview( comment, rating, this.props.productId);
+        await addNewReview( comment, this.props.productId);
         this.props.history.push("/products");
     }
 
 
 
     render() {
-        const { comment, rating } = this.state;
+        const { comment } = this.state;
 
         return(
             <div className="review">
             {this.props.loggedInUser ? (
+                <>
 
                 <Form className="form" onSubmit={this.handleFormSubmit} >
                 <h3>Review Product</h3>
@@ -64,23 +56,17 @@ class AddReview extends React.Component {
                 </Form.Group>
                 <br />
 
-                <StarRatings
-                    rating={rating}
-                    starEmptyColor='grey'
-                    starRatedColor="yellow"
-                    starDimension='15px'
-                    changeRating={ this.changeRating }
-                    name='rating'
-                />
                 <br></br>
-                <Button variant="info" as="input" type="submit" value="Rate Product" ></Button>
+                <Button variant="info" as="input" type="submit" value="Review Product" ></Button>
                 <br></br>
                 <br></br>
             </Form>
 
+            </>
+
             ) : (
                 <>
-                <h5>No reviews available</h5>
+                <h5 style={{backgroundColor: 'orange'}}>No reviews available</h5>
                 </>
                 )
             }
