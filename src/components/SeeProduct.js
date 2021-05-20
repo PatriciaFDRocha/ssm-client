@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { Button, Container } from 'react-bootstrap';
 import '../styles/SeeProduct.css';
 import AddReview from './AddReview';
-import WishList from './WishList';
+// import WishList from './WishList';
 
 
 class SeeProduct extends React.Component {
@@ -50,17 +50,17 @@ class SeeProduct extends React.Component {
 
 
     addToCart = async (productId) => {
-        
-        const response = await addShoppingToDB(productId);
+        const response = await addShoppingToDB(productId, 1);
         console.log(response);
 
         this.setState({
             productsInCart: response.data
         });
+
+        console.log(response.data.products)
     };
 
     addToFavourites = async (id) => {
-        
         await addToWishList(id);
 
         this.props.history.push("/products/favourites");
@@ -101,7 +101,7 @@ class SeeProduct extends React.Component {
 
                 <Button className="button3" onClick={() => this.addToFavourites(_id)} variant="info" type="button" >Add to Wish List</Button>
                 <br></br>
-                <Button onClick={() => this.addToCart(_id)} variant="info" type="button" >Add To ShoppingCart</Button>
+                <Button onClick={() => this.addToCart(_id)} variant="info" >Add To ShoppingCart</Button>
 
                 {/* <WishList productId={_id} loggedInUser={this.props.loggedInUser}/> */}
 

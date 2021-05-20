@@ -38,11 +38,11 @@ export const addNewReview = ( comment, rating, id) => {
 
 //Favourites
 export const getWishList = () => {
-  return axios.get(`${baseUrl}/products/favourites`, { withCredentials: true })
+  return axios.get(`${baseUrl}/favourites`, { withCredentials: true })
 };
 
 export const addToWishList = (id) => {
-  return axios.post(`${baseUrl}/products/${id}/favourites`, { withCredentials: true })
+  return axios.post(`${baseUrl}/products/${id}/favourites`, null, { withCredentials: true })
 };
 
 export const removeFromWishList = (id) => {
@@ -52,8 +52,8 @@ export const removeFromWishList = (id) => {
 
 
 //Shopping cart
-export const addShoppingToDB = (id) => {
-  return axios.post(`${baseUrl}/shopping-cart`, id, { withCredentials: true })
+export const addShoppingToDB = (productId, quantity) => {
+  return axios.post(`${baseUrl}/shopping-cart`, {productId, quantity}, { withCredentials: true })
 };
 
 export const getShoppingCart = () => {

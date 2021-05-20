@@ -42,6 +42,8 @@ class NavBar extends React.Component {
 
                     <NavLink exact to="/shop"> MyShop </NavLink>
 
+                    <NavLink exact to="/shopping-cart"> ShoppingCart image </NavLink>
+
                 </Nav>
                 <Form inline className="search-bar">
                     <FormControl className="mr-sm-2" onChange={this.handleChange} value={this.state.keyword} type="search" placeholder="Search product" />

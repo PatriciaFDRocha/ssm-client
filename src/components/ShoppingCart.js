@@ -11,11 +11,11 @@ class ShoppingCart extends React.Component {
 
     async componentDidMount () {
         const response = await getShoppingCart();
-
-        this.setState({
-            productsInCart: response.data
-        })
         
+        this.setState({
+            productsInCart: response.data.products
+        })
+
     }
 
     deleteFromCart = (id) => {
@@ -29,11 +29,8 @@ class ShoppingCart extends React.Component {
 
         const { loggedInUser } = this.props;
 
-        return loggedInUser ? (
-            <div>
-                {productsInCart === null  ( <h4>Shopping Cart is empty</h4> ) : (
-                    
-                    {productsInCart.map((productInCart) => {
+        return loggedInUser && productsInCart ? (  
+                    productsInCart.map((productInCart) => {
                         return ( 
                         <div className="box" style={{ height: '100%' }} >
                         <article className="media">
@@ -70,11 +67,9 @@ class ShoppingCart extends React.Component {
                             </article>
                             </div>
                         )}
-                        )}
-                    )}  
-                </div>
-        ) : (
-            <h3>Login Nedded </h3>
+                        )
+                    ) : (
+            <h3>Shopping Cart Not Available. Please login </h3>
         )
     }
 }

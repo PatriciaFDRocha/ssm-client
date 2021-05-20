@@ -8,16 +8,13 @@ class WishList extends React.Component {
 
     state = {
         favourites: [],
-        _id : '',
     }
 
     async componentDidMount() {
         const response = await getWishList();
-        const productId = await getProduct(this.props.match.params.id);
         
         this.setState({
             favourites: response.data,
-            _id: productId,
         })
     }
 
@@ -27,7 +24,7 @@ class WishList extends React.Component {
     }
 
     render() {
-        const { favourites, _id } = this.state; 
+        const { favourites } = this.state; 
         
         return(
             <div className="add" style={{ height: '100%' }} >
@@ -41,12 +38,7 @@ class WishList extends React.Component {
                         {favourites.map((favourite) => {
                             return(
                                 <>
-                                <Form.Group controlId="exampleForm.ControlInput1">
-                                    <Form.Label><b> {favourite.name} </b></Form.Label>
-                                    <Form.Control type="text" name="name" onChange={this.handleChange} value={favourite.name} />
-                                </Form.Group>
-
-                                <Button onClick={() => this.deleteFromFavourites(_id)} variant="danger" > Remove </Button>
+                                 <p>{favourite.product.name}</p>
                                 </>
                             )
                         })}

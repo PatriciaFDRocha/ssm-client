@@ -105,7 +105,7 @@ class App extends React.Component {
             loggedInUser={loggedInUser} {...props} />}
           />
 
-          <Route exact path="/products/:id/favourites" 
+          <Route exact path="/favourites" 
           render={(props) => <WishList 
             loggedInUser={loggedInUser} {...props} />}
           />
