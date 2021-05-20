@@ -3,7 +3,7 @@ import { getProduct, deleteProduct, addShoppingToDB, addToWishList, getShoppingC
 import { NavLink } from 'react-router-dom';
 import { Button, Container } from 'react-bootstrap';
 import '../styles/SeeProduct.css';
-import AddReview from './AddReview';
+import {toast} from 'react-toastify';
 
 
 class SeeProduct extends React.Component {
@@ -44,23 +44,25 @@ class SeeProduct extends React.Component {
 
     handleDeleteProduct = async (id) => {
         await deleteProduct(id);
+        toast.warning('Product Deleted');
+
         this.props.history.push('/products');
     };
 
 
     addToCart = async (productId) => {
         const response = await addShoppingToDB(productId, 1);
-        console.log(response);
 
         this.setState({
             productsInCart: response.data
         });
 
-        console.log(response.data.products)
+        toast.success('Product Added To Shopping Cart');
     };
 
     addToFavourites = async (id) => {
         await addToWishList(id);
+        toast.success('Product Added To Wish List');
 
         this.props.history.push("/products");
     };
@@ -88,14 +90,13 @@ class SeeProduct extends React.Component {
                 
                 
                 {this.props.loggedInUser && (this.props.loggedInUser.username === this.state.owner.username && (
-                    <div> 
+                    <div className="see-div"> 
                     <Button className="button1" onClick={() => this.handleDeleteProduct(_id)} variant="danger" > Delete </Button>
 
                     <NavLink to={`/products/${_id}/edit`}> <Button className="button2" variant="success" > Edit </Button> </NavLink>
-
                     <br></br>
-                    {/* <AddReview {...this.props} productId={_id} loggedInUser={this.props.loggedInUser}/> */}
                     <NavLink to={`/reviews/${_id}/add`} > <Button variant="success" >Add review</Button> </NavLink>
+                    
                     </div>
                 ))}
 
@@ -104,12 +105,13 @@ class SeeProduct extends React.Component {
                 <Button onClick={() => this.addToCart(_id)} variant="info" >Add To Shopping Cart</Button>
 
                 <Container fluid style={{ backgroundColor: 'maroon', color: 'whitesmoke' }}>
+                    
                     <p> <strong> Reviews: </strong> </p>
                     {reviews.map((review) => {
                         return(
                             <>
                             <h5>{this.props.loggedInUser.name}</h5>
-                            <p>{review.rating}</p>
+                            <p>{review.comment}</p>
                             </>
                         )
                     })}

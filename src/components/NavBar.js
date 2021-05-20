@@ -29,7 +29,7 @@ class NavBar extends React.Component {
             <div>
 
             <Navbar bg="light" expand="lg">
-                <Navbar.Brand href="/" className="logo" > SSM </Navbar.Brand>
+                <Navbar.Brand href="/" className="logo" > <img src="/images/ssm-1.png"  className="ssm-1" alt="ssm"/> </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
@@ -42,12 +42,12 @@ class NavBar extends React.Component {
 
                     <NavLink exact to="/shop"> MyShop </NavLink>
 
-                    <NavLink exact to="/shopping-cart"> <img src="/images/shopping-cart.png" alt="shopping-cart" width="30px" height="30px" /> </NavLink>
+                    <NavLink exact to="/shopping-cart"> <img src="/images/shopping-cart.png" className="shop-cart" alt="shopping-cart" /> </NavLink>
 
                 </Nav>
                 <Form inline className="search-bar">
                     <FormControl className="mr-sm-2" onChange={this.handleChange} value={this.state.keyword} type="search" placeholder="Search product" />
-                    <Button className="search-button" onClick={() => this.props.handleSearch(this.state.keyword)}><img src="../images/search.png" alt="search" /></Button>
+                    <Button className="search-button" onClick={() => this.props.handleSearch(this.state.keyword)}><img src="/images/search.png" alt="search" /></Button>
                 </Form>
                 <NavLink exact to="/"> <Button onClick={this.logoutUser} variant="warning" >Logout</Button> </NavLink>
                 </Navbar.Collapse>
@@ -58,7 +58,7 @@ class NavBar extends React.Component {
             </div>
         ) : (
             <Navbar bg="light" expand="lg">
-                <Navbar.Brand href="/" className="logo" > SSM </Navbar.Brand>
+                <Navbar.Brand href="/" className="logo" > <img src="/images/ssm-1.png" className="ssm-1" alt="ssm"/> </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">

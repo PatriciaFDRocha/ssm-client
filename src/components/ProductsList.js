@@ -17,7 +17,7 @@ class ProductList extends React.Component {
         let filteredProducts;
         if (values.search) {
             filteredProducts = response.data.filter((product) => {
-                return product.name.indexOf(values.search) !== -1
+                return product.name.toLowerCase().indexOf(values.search.toLowerCase()) !== -1
             })
         } else {
             filteredProducts = response.data;

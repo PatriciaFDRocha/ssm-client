@@ -1,7 +1,8 @@
 import React from 'react';
-import { addNewReview } from '../api';
+import { getProduct, addNewReview } from '../api';
 import { Form, Button } from 'react-bootstrap';
 import '../styles/AddReview.css';
+import {toast} from 'react-toastify';
 
 
 class AddReview extends React.Component {
@@ -9,6 +10,8 @@ class AddReview extends React.Component {
     state = {
         comment: "",
     }
+
+ 
 
     handleChange = (event) => {
         let { name, value } = event.target;
@@ -27,13 +30,16 @@ class AddReview extends React.Component {
         } = this.state;
 
         
-        await addNewReview( comment, this.props.productId);
+        await addNewReview(comment, this.props.match.params.id);
+        toast.success('Review Added');
+        debugger
         this.props.history.push("/products");
     }
 
 
 
     render() {
+
         const { comment } = this.state;
 
         return(

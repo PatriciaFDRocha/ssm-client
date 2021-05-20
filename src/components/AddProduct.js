@@ -2,6 +2,7 @@ import React from 'react';
 import '../styles/AddProduct.css';
 import { addProduct, uploadFile } from '../api';
 import { Form, Button } from 'react-bootstrap';
+import {toast} from 'react-toastify';
 
 class AddProduct extends React.Component {
     state = {
@@ -53,6 +54,8 @@ class AddProduct extends React.Component {
         };
 
         await addProduct(newProduct);
+        toast.success('Product Created');
+        
         this.props.history.push("/products");
     }
 

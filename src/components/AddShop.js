@@ -2,6 +2,7 @@ import React from 'react';
 import '../styles/AddProduct.css';
 import { addShop } from '../api';
 import { Form, Button } from 'react-bootstrap';
+import {toast} from 'react-toastify';
 
 class AddShop extends React.Component {
     state = {
@@ -34,6 +35,8 @@ class AddShop extends React.Component {
 
 
         await addShop(newShop);
+        toast.success('New Shop Added');
+
         this.props.history.push("/shop");
     }
 

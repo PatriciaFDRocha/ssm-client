@@ -30,8 +30,8 @@ export const deleteProduct = (id) => {
 
 
 //Reviews
-export const addNewReview = ( comment, id) => {
-  return axios.post(`${baseUrl}/reviews/${id}/add`, { comment }, { withCredentials: true })
+export const addNewReview = ( comment, id ) => {
+  return axios.post(`${baseUrl}/reviews/${id}/add`, {comment}, { withCredentials: true })
 };
 
 
@@ -46,7 +46,7 @@ export const addToWishList = (id) => {
 };
 
 export const removeFromWishList = (id) => {
-  return axios.delete(`${baseUrl}/favourites/${id}`, { withCredentials: true })
+  return axios.delete(`${baseUrl}/favourites/${id}`, null, { withCredentials: true })
 };
 
 

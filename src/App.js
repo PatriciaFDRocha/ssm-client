@@ -5,7 +5,8 @@ import { getAllProducts, loggedin } from './api';
 import './styles/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './components/NavBar';
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import HomePage from './components/HomePage';
 import Signup from './components/Signup';
 import Login from './components/Login';
@@ -70,6 +71,7 @@ class App extends React.Component {
 
     return (
       <div className="App" style={{ height: '100%' }}>
+      <ToastContainer />
         <Navbar handleSearch={this.handleSearch} loggedInUser={loggedInUser} setCurrentUser={this.setCurrentUser} />
 
         <Switch>
@@ -107,7 +109,7 @@ class App extends React.Component {
           />
 
           <Route exact path="/favourites" 
-          render={(props) => <WishList 
+            render={(props) => <WishList 
             loggedInUser={loggedInUser} {...props} />}
           />
 
