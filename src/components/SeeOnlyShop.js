@@ -51,8 +51,11 @@ class SeeOnlyShop extends React.Component {
                 {this.props.loggedInUser && (this.props.loggedInUser.username === this.state.owner.username &&
                 <>
                 <Button onClick={() => this.handleDeleteShop(_id)} variant="danger" > Delete </Button>
+                <br></br>
                 <NavLink to="/shop/add">  <Button variant="info" as="input" type="button" value="Add Shop" /> </NavLink>
+                <br></br>
                 <NavLink to={`/shop/${_id}/edit`}>  <Button variant="info" as="input" type="button" value="Edit Shop" /> </NavLink>
+                <br></br>
                 <NavLink to={`/products/add`}>  <Button variant="info" as="input" type="button" value="Add Product" /> </NavLink>
                 </>
                 )}
