@@ -11,6 +11,7 @@ class SeeOnlyShop extends React.Component {
         _id: "",
         shopName: "",
         description: '',
+        username: '',
     }
 
     async componentDidMount() {
@@ -22,6 +23,7 @@ class SeeOnlyShop extends React.Component {
         _id: response.data._id,
         shopName: response.data.shopName,
         description: response.data.description,
+        username: response.data.username
       });
   
     };

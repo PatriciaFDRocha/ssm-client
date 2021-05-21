@@ -29,7 +29,7 @@ class SeeAllShops extends React.Component {
                     <div className="shop">
                         <h2> <strong> Name: </strong> {shop.shopName} </h2>
                         <p> <strong>Description: </strong>  {shop.description} </p>
-                        {/* <p>Location: {latitude} {longitude}</p> */}
+
                         <NavLink to={`/shop/${shop._id}`}>  <Button variant="info" as="input" type="button" value="See Shop" /> </NavLink>
                         
                     </div>
