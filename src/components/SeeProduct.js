@@ -95,23 +95,23 @@ class SeeProduct extends React.Component {
 
                     <NavLink to={`/products/${_id}/edit`}> <Button className="button2" variant="success" > Edit </Button> </NavLink>
                     <br></br>
-                    <NavLink to={`/reviews/${_id}/add`} > <Button variant="success" >Add review</Button> </NavLink>
                     
                     </div>
                 ))}
 
+                <NavLink to={`/reviews/${_id}/add`} > <Button variant="success" >Add review</Button> </NavLink>
+                <br></br>
                 <Button className="button3" onClick={() => this.addToFavourites(_id)} variant="info" type="button" >Add to Wish List</Button>
                 <br></br>
                 <Button onClick={() => this.addToCart(_id)} variant="info" >Add To Shopping Cart</Button>
-
-                <Container fluid style={{ backgroundColor: 'maroon', color: 'whitesmoke' }}>
+                <br></br>
+                <Container fluid style={{ backgroundColor: 'maroon', color: 'whitesmoke', paddingBottom: '1%', paddingTop: '1%' }}>
                     
                     <p> <strong> Reviews: </strong> </p>
                     {reviews.map((review) => {
                         return(
                             <>
-                            <h5>{this.props.loggedInUser.name}</h5>
-                            <p>{review.comment}</p>
+                            <h5>{this.props.loggedInUser.name}: {review.comment}</h5>
                             </>
                         )
                     })}

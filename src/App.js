@@ -77,9 +77,8 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <PrivateRoute exact path="/products" component={ProductList} />
-          <PrivateRoute 
-            exact path="/products/add" 
-            render={(props) => <AddProduct loggedInUser={loggedInUser} {...props} />} />
+          
+          <PrivateRoute exact path="/products/add" component={AddProduct} />
           
           <Route exact path="/products/:id" render={(props) => <SeeProduct loggedInUser={loggedInUser} {...props} />} />
           

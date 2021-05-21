@@ -11,6 +11,7 @@ class AddProduct extends React.Component {
         price: 0,
         description: '',
         brand: '',
+        shopName: ''
     }
 
     handleFileChange = (event) => {
@@ -36,6 +37,7 @@ class AddProduct extends React.Component {
             price,
             description,
             brand,
+            shopName
         } = this.state;
         
         const uploadData = new FormData();
@@ -51,6 +53,7 @@ class AddProduct extends React.Component {
             price,
             description,
             brand,
+            shopName,
         };
 
         await addProduct(newProduct);
@@ -66,7 +69,7 @@ class AddProduct extends React.Component {
             price,
             description,
             brand,
-
+            shopName,
         } = this.state;
 
         return(
@@ -99,9 +102,8 @@ class AddProduct extends React.Component {
                 <br />
                 <Form.Group controlId="exampleForm.ControlTextarea1">
                     <Form.Label><b>Shop Name</b></Form.Label>
-                    <Form.Control  type="text" name="shopName" readOnly value={this.props.loggedInUser.name} />
+                    <Form.Control type="text" name="shopName" onChange={this.handleChange} value={shopName} />
                 </Form.Group>
-                <br />
                 <Button variant="info" as="input" type="submit" value="Create Product" />
                 <br></br>
                 <br></br>

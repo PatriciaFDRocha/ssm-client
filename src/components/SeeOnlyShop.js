@@ -56,7 +56,7 @@ class SeeOnlyShop extends React.Component {
                 <br></br>
                 <NavLink to={`/shop/${_id}/edit`}>  <Button variant="info" as="input" type="button" value="Edit Shop" /> </NavLink>
                 <br></br>
-                <NavLink to={`/products/add`}>  <Button variant="info" as="input" type="button" value="Add Product" /> </NavLink>
+                <NavLink  to={`/products/add`}>  <Button variant="info" as="input" type="button" value="Add Product" /> </NavLink>
                 </>
                 )}
 
