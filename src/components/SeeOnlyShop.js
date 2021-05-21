@@ -11,7 +11,7 @@ class SeeOnlyShop extends React.Component {
         _id: "",
         shopName: "",
         description: '',
-        username: '',
+        owner: '',
     }
 
     async componentDidMount() {
@@ -23,7 +23,7 @@ class SeeOnlyShop extends React.Component {
         _id: response.data._id,
         shopName: response.data.shopName,
         description: response.data.description,
-        username: response.data.username
+        owner: response.data.user
       });
   
     };
@@ -48,7 +48,7 @@ class SeeOnlyShop extends React.Component {
 
                 <NavLink to="/products"> <Button variant="info" as="input" type="button" value="See All Products" /> </NavLink>
 
-                {this.props.loggedInUser && (this.props.loggedInUser.username === this.state.username &&
+                {this.props.loggedInUser && (this.props.loggedInUser.username === this.state.owner.username &&
                 <>
                 <Button onClick={() => this.handleDeleteShop(_id)} variant="danger" > Delete </Button>
                 <NavLink to="/shop/add">  <Button variant="info" as="input" type="button" value="Add Shop" /> </NavLink>
